@@ -69,9 +69,11 @@ def add_note():
     if 'user_id' in session:
         content = request.form['content']
         category = request.form.get('category', 'عمومی')
+        print(content)
+        print(category)
         # with sqlite3.connect(get_db_path()) as conn:
         #     cursor = conn.cursor()
-        print(text("INSERT INTO notes (user_id, content, category) VALUES (:user_id, :content, :category)"),
+        print("INSERT INTO notes (user_id, content, category) VALUES (:user_id, :content, :category)",
             {"user_id": session['user_id'], "content": content, "category": category})
         db.session.execute(
 
