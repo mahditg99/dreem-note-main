@@ -18,7 +18,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = (
 )
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
-
+print('connceted')
 
 
 app.secret_key = os.environ.get('SECRET_KEY', 'dreamsecret$$$###@@!!')
@@ -71,7 +71,10 @@ def add_note():
         category = request.form.get('category', 'عمومی')
         # with sqlite3.connect(get_db_path()) as conn:
         #     cursor = conn.cursor()
+        print(text("INSERT INTO notes (user_id, content, category) VALUES (:user_id, :content, :category)"),
+            {"user_id": session['user_id'], "content": content, "category": category})
         db.session.execute(
+
             text("INSERT INTO notes (user_id, content, category) VALUES (:user_id, :content, :category)"),
             {"user_id": session['user_id'], "content": content, "category": category}
         )
